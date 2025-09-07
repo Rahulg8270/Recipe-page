@@ -1,10 +1,8 @@
-.attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-      .attribution a {
-        color: hsl(228, 45%, 44%);
-}
+
+/* =========================
+    Settings (design tokens) 
+    =========================
+*/
 :root{
     --spacing-md: 2rem;
     --spacing-lg: 2.5rem;
@@ -26,12 +24,40 @@
 
     
 }
+/* Composition */
+.flow > * + * {
+    margin-block-start: var(--spacing-md);
+} 
+
+
+/* ==========================
+    Utilities (single-purpose) 
+    ==========================
+*/
 *{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
     
 }
+.u-text-center{
+    text-align: center;
+}
+.u-fw-bold{
+    font-weight: 700;
+}
+.u-mb-sm{
+    margin-bottom: var(--space-sm);
+}
+.u-mb-md{
+    margin-bottom: var(--spacing-md);
+}
+
+
+/*========================
+    Blocks (component & scopes 
+=========================*/
+/* page-level */
 body{
     font-size: 1em;
     background-color: var(--white);
@@ -41,139 +67,172 @@ body{
     line-height: 1.5;
     
 }
-main{
+
+main.page{
     display: flex;
     flex-direction: column;
+    gap: var(--spacing-lg);
+    /* padding: var(--space-xs); */
     background-color:var(--white);
 }
-.highlight-text{
-    font-weight: 700;
+
+ /* Attribution footer */
+.attribution{
+    text-align: center;
+    font-size: var(--space-sm);
+    color: var(--stone-600);
+    padding: var(--space-xs) var(--space-md);
+    margin-block-end: var(--spacing-lg);
+}
+.attribution a{
+    color: hsl(228, 45%, 44%);
 }
 
-.image-container{
-    
+
+.recipe{
     width: 100%;
-}
-.image-container img{
-    width: 100%;
-    background-color: var(--white);
-    margin: 0;
+    padding: var(--spacing-md);
+    padding-block-start: 0;
+    border-radius: 0;
+    color: var(--stone-600);
 }
 
-.recipe-container{
-    width: 100%;
-    padding: var(--spacing-lg) var(--spacing-md);
-    margin: 0 auto;
-    text-wrap: pretty;
-    inline-size: min-content;
-}
-header{
-    margin-bottom: var(--spacing-md);
-}
-section{
-    margin: var(--spacing-md) 0;
-}
-.preparation-container{
-    padding: var(--space-sm);
-    background-color: hsl(330, 100%, 98%);
-}
-.preparation-container ul{
-    padding: var(--space-xs);
-}
-.preparation-container ul li{
-    padding-left: var(--space-sm);
-    margin-left: var(--space-xs);
-}
-h1{
+/* Title / header */
+.recipe__header .recipe__title{
     color: var(--stone-900);
-    font-size: 2.2em;
+    font-family: "Young Serif", serif;
     font-weight: 400;
+    font-size: 2.2em;
     line-height: 1.1;
 }
-h1,h3{
-    padding-bottom: var(--space-sm);
+.recipe__header .recipe__lead {
+    color: var(--stone-600);
+    max-width: 65ch;
+}
+
+
+/* Section titles */
+.recipe__section-title{
     font-family: "Young Serif", serif;
-}
-h3{
-    color: var(--brown-800);
-    font-size: 1.75em;
     font-weight: 400;
-}
-h2{
-    padding-bottom: var(--space-xs);
-    color: var(--rose-800);
+    font-size: 1.75em;
+    padding-bottom: var(--space-sm);
 }
 
-
-
-ol > li::marker {
-  font-weight: 900;
+.recipe__preparation{
+    padding: var(--space-sm);
+    background-color: hsl(330, 100%, 98%);
+    border-radius: 6px;
 }
-
-.ingredients-list{
+.recipe__prep-list {
+    padding-inline-start: var(--space-xs);
+}
+.recipe__ingredients {
+    padding: 0; /* spacing handled by flow */
+}
+.recipe__ingredients-list {
+    padding-inline-start: var(--space-md);
+}
+.recipe__ingredients-list li{
     padding-left: var(--space-sm);
-
-}
-.ingredients-list li{
-    padding-left: var(--space-sm);
+    padding-block-end: var(--space-xs) ;
+    margin-left: var(--space-sm);
 }
 
-.instruction-order{
+
+
+/* Instruction order */
+.recipe__instruction-order {
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
-    padding: 0 var(--space-sm);
+    padding-inline-start: var(--space-sm);
+}
+.recipe__instruction-order > li::marker {
+    font-weight: 900;
 }
 
-.nutrition-container{
-    text-align: left;
+/* Nutrition */
+.recipe__nutrition-desc {
+  padding-bottom: var(--space-sm);
 }
-.nutrition-desription{
-    margin-bottom: var(--space-sm);
-}
-table{
+.nutrition-table {
     width: 100%;
+    border-collapse: collapse;
 }
-th,td{
+.nutrition-table th,
+.nutrition-table td {
     border-bottom: 1px solid var(--stone-150);
     text-align: left;
-    padding: 0 var(--space-xs);
-    padding-bottom: var(--space-xs);
-    margin: 0;
-
+    padding: var(--space-xs) 0;
 }
-th{
+
+
+/* Image Block */
+.recipe__image {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.recipe__image-img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    background-color: var(--white);
+}
+
+/* ============================
+    Exceptions (one-off overrides)
+   ============================ */
+.nutrition-table th:not(.u-fw-bold){
     font-weight: 400;
 }
-.last-child{
-    border: none;
+.nutrition-table th:not(.underline-enable),.nutrition-table td:not(.underline-enable){
+    border: none
 }
+
+
 
 hr{
     color: var(--stone-150);
 }
 
-@media screen and (min-width:768px) {
-    body{
-        line-height: 1.3;
-    }
-    main{
-        width: 60%;
-        margin: 0 auto;
-        border-radius: 30px;
-        
-        /* padding: var(--spacing-lg); */
-    }
-    .image-container{
-        padding: var(--spacing-lg);
-    }
-    .image-container img{
-        border-radius: 10px;
-    }
-    .recipe-container{
-        width: 100%;
-        padding: var(--spacing-lg);
-        padding-top: 0;
-    }
+@media screen and (min-width:48rem) {
+    body { line-height: 1.3; }
+
+        main.page {
+            width: 60%;
+            max-width: 46em;
+            max-width: 38.5em;
+            margin: 8rem auto;
+            padding: 0;
+            border-radius: 1.875rem;
+            gap: 0; /* image and recipe sit flush */
+        }
+
+        /* Make image and recipe appear as stacked blocks inside the main container
+            Keep image padding inside its own block to align with recipe content */
+        .recipe__image {
+            padding: var(--spacing-lg);
+        }
+        .recipe__image-img {
+            border-radius: 0.625rem;
+        }
+        .recipe {
+            padding: var(--spacing-lg);
+            padding-top: 0;
+            border-radius: 1.875rem;
+        }
+
+        /* Slightly larger spacing for flow at larger sizes */
+        .flow > * + * { margin-block-start: var(--space-sm); }
+
     
+}
+@media screen and (min-width:75rem){
+        main.page {
+            width: 60%;
+            max-width: 46em;
+        }
 }
